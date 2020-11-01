@@ -1,0 +1,33 @@
+{
+  "name": "electron-auto-update",
+  "version": "1.0.0",
+  "description": "electron app auto-update",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halassonn/electron-auto-update.git"
+  },
+  "keywords": [
+    "electron",
+    "app",
+    "autoupdate"
+  ],
+  "author": "halasson gultom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halassonn/electron-auto-update/issues"
+  },
+  "homepage": "https://github.com/halassonn/electron-auto-update#readme",
+  "devDependencies": {
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1"
+  },
+  "dependencies": {
+    "electron-updater": "^4.3.5"
+  }
+}
