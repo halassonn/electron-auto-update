@@ -1,2 +1,4 @@
+.gitignore
 electron-builder.yml
 node_modules/
+package-lock.json
