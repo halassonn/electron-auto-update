@@ -1,12 +1,12 @@
 {
   "name": "electron-auto-update",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "electron app auto-update",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish always"
+    "deploy": "electron-builder build --win --publish onTagOrDraft"
   },
   "repository": {
     "type": "git",
