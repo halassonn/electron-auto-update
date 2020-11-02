@@ -3,6 +3,7 @@ const { autoUpdater } = require("electron-updater");
 const log = require("electron-log");
 
 let mainWindow;
+autoUpdater.autoDownload = false
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -21,7 +22,9 @@ function createWindow() {
     mainWindow = null;
   });
 
-  autoUpdater.checkForUpdates();
+  setInterval(() => {
+    autoUpdater.checkForUpdates()
+  }, 60000)
 
   // mainWindow.once('ready-to-show', () => {
   //   console.log("Check update")
@@ -106,6 +109,11 @@ autoUpdater.on("update-downloaded", (info) => {
 //   autoUpdater.quitAndInstall();
 // });
 
-ipcMain.on('restart_app', () => {
+ipcMain.on('restart_app_and_update', () => {
   autoUpdater.quitAndInstall();
 });
+
+ipcMain.on('start_download', () => {
+  autoUpdater.downloadUpdate();
+});
+

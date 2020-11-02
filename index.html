@@ -7,7 +7,7 @@
       margin: 0;
       padding: 20px;
       font-family: sans-serif;
-      background-color: #f0af4d;
+      background-color: #2fa50b;
       text-align: center;
     }
     #notification {
@@ -18,7 +18,7 @@
       padding: 20px;
       border-radius: 5px;
       background-color: white;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px 0 rgba(132, 216, 111, 0.2);
     }
     .hidden {
       display: none;
@@ -31,6 +31,7 @@
   <div id="notification" class="hidden">
     <p id="message"></p>
     <button id="close-button" onClick="closeNotification()">Close</button>
+    <button id="close-button-download" onClick="startDownloadUpdate()">Close And Download</button>
     <button id="restart-button" onClick="restartApp()" class="hidden">
       Restart
     </button>
@@ -41,6 +42,7 @@
     const notification = document.getElementById("notification");
     const message = document.getElementById("message");
     const restartButton = document.getElementById("restart-button");
+    const downloadUpdate = document.getElementById("close-button-download");
 
     // Listen for messages
 
@@ -86,7 +88,11 @@
     }
 
     function restartApp() {
-      ipcRenderer.send("restart_app");
+      ipcRenderer.send("restart_app_and_update");
+    }
+    function startDownloadUpdate() {
+      notification.classList.add("hidden");
+      ipcRenderer.send("start_download");
     }
   </script>
 </body>
