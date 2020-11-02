@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build --win --publish onTagOrDraft"
+    "build": "electron-builder build --win --publish onTag never  ",
+    "deploy": "electron-builder build --win --publish onTag always"
   },
   "repository": {
     "type": "git",
