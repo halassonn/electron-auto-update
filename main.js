@@ -79,10 +79,10 @@ autoUpdater.on("checking-for-update", () => {
 });
 
 autoUpdater.on("update-available", (info) => {
-  sendStatusToWindow("Update available.");
+  sendStatusToWindow("Update available");
 });
 autoUpdater.on("update-not-available", (info) => {
-  sendStatusToWindow("Update not available.");
+  sendStatusToWindow("Update not available");
 });
 
 autoUpdater.on("error", (err) => {

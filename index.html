@@ -7,7 +7,7 @@
       margin: 0;
       padding: 20px;
       font-family: sans-serif;
-      background-color: #646464;
+      background-color: #f0af4d;
       text-align: center;
     }
     #notification {
@@ -28,7 +28,7 @@
 <body>
   <h1>Electron Auto Update Example</h1>
   <p id="version"></p>
-  <div id="notification" class="hiddenn">
+  <div id="notification" class="hidden">
     <p id="message"></p>
     <button id="close-button" onClick="closeNotification()">
       Close
@@ -45,21 +45,35 @@
     const restartButton = document.getElementById('restart-button');
 
      // Listen for messages
- 
+
+   
   ipcRenderer.on('message', function (event, text) {
     console.log('Message from updater:', text);
+    if(text){
+      message.innerText = text;
+      notification.classList.remove('hidden');
+    }
   });
     
     ipcRenderer.send('app_version');
+   
     ipcRenderer.on('app_version', (event, arg) => {
       ipcRenderer.removeAllListeners('app_version');
       version.innerText = 'Version ' + arg.version;
     });
 
+    
+
+    // ipcRenderer.on('update-not-available', () => {
+    //   ipcRenderer.removeAllListeners('update-not-available');
+    //   message.innerText = 'A new update is not available.';
+    //   notification.classList.remove('hidden');
+    // });
+
     // ipcRenderer.on('update_available', () => {
     //   ipcRenderer.removeAllListeners('update_available');
     //   message.innerText = 'A new update is available. Downloading now...';
-    //   // notification.classList.remove('hidden');
+    //   notification.classList.remove('hidden');
     // });
 
     // ipcRenderer.on('update_downloaded', () => {
