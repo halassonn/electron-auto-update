@@ -63,9 +63,7 @@ ipcMain.on("app_version", (event) => {
 //   mainWindow.webContents.send('update_downloaded');
 // });
 
-// ipcMain.on('restart_app', () => {
-//   autoUpdater.quitAndInstall();
-// });
+
 
 const sendStatusToWindow = (text) => {
   log.info(text);
@@ -99,9 +97,15 @@ autoUpdater.on("update-downloaded", (info) => {
   sendStatusToWindow("Update downloaded; will install now");
 });
 
-autoUpdater.on("update-downloaded", (info) => {
+
+
+// autoUpdater.on("update-downloaded", (info) => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
+//   autoUpdater.quitAndInstall();
+// });
+
+ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });

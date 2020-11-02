@@ -30,39 +30,37 @@
   <p id="version"></p>
   <div id="notification" class="hidden">
     <p id="message"></p>
-    <button id="close-button" onClick="closeNotification()">
-      Close
-    </button>
+    <button id="close-button" onClick="closeNotification()">Close</button>
     <button id="restart-button" onClick="restartApp()" class="hidden">
       Restart
     </button>
   </div>
   <script>
-    const { ipcRenderer } = require('electron');
-    const version = document.getElementById('version');
-    const notification = document.getElementById('notification');
-    const message = document.getElementById('message');
-    const restartButton = document.getElementById('restart-button');
+    const { ipcRenderer } = require("electron");
+    const version = document.getElementById("version");
+    const notification = document.getElementById("notification");
+    const message = document.getElementById("message");
+    const restartButton = document.getElementById("restart-button");
 
-     // Listen for messages
+    // Listen for messages
 
-   
-  ipcRenderer.on('message', function (event, text) {
-    console.log('Message from updater:', text);
-    if(text){
-      message.innerText = text;
-      notification.classList.remove('hidden');
-    }
-  });
-    
-    ipcRenderer.send('app_version');
-   
-    ipcRenderer.on('app_version', (event, arg) => {
-      ipcRenderer.removeAllListeners('app_version');
-      version.innerText = 'Version ' + arg.version;
+    ipcRenderer.send("app_version");
+
+    ipcRenderer.on("app_version", (event, arg) => {
+      ipcRenderer.removeAllListeners("app_version");
+      version.innerText = "Version " + arg.version;
     });
 
-    
+    ipcRenderer.on("message", function (event, text) {
+      ipcRenderer.removeAllListeners("message");
+      if (text==="Update available") {
+        message.innerText = text;
+        notification.classList.remove("hidden");
+      }
+      if (text === "Update downloaded; will install now") {
+        restartButton.classList.remove("hidden");
+      }
+    });
 
     // ipcRenderer.on('update-not-available', () => {
     //   ipcRenderer.removeAllListeners('update-not-available');
@@ -84,11 +82,11 @@
     // });
 
     function closeNotification() {
-      notification.classList.add('hidden');
+      notification.classList.add("hidden");
     }
-    
+
     function restartApp() {
-      ipcRenderer.send('restart_app');
+      ipcRenderer.send("restart_app");
     }
   </script>
 </body>
